@@ -759,8 +759,40 @@
     margin-bottom: 22px;
   }
 
+  /* ── BOOKING WIDGET ── */
+  .booking-widget-wrap {
+    position: relative;
+    z-index: 2;
+    max-width: 860px;
+    margin: 0 auto;
+    background: rgba(13,12,10,0.75);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(196,146,59,0.3);
+    overflow: hidden;
+  }
+  #sevenrooms-iframe {
+    width: 100%;
+    height: 620px;
+    display: block;
+    border: none;
+    background: transparent;
+  }
+  .booking-fallback {
+    padding: 20px;
+    border-top: 1px solid rgba(196,146,59,0.15);
+    text-align: center;
+  }
+  .booking-fallback p {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    color: rgba(240,228,208,0.3);
+    margin-bottom: 0;
+  }
+
   @media (max-width: 900px) {
-    nav { padding: 22px 28px; }
+    #sevenrooms-iframe { height: 520px; }
+  }
     nav.scrolled { padding: 16px 28px; }
     .nav-links { display: none; }
     section { padding: 80px 28px; }
@@ -793,7 +825,7 @@
     <li><a href="#reviews">Reviews</a></li>
     <li><a href="#info">Visit</a></li>
   </ul>
-  <a href="https://www.google.com/maps/search/?api=1&query=Outlier+Restaurant+Glasgow" target="_blank" class="nav-cta">Reserve</a>
+  <a href="https://www.sevenrooms.com/explore/outlier/reservations/create/search" target="_blank" class="nav-cta">Reserve a Table</a>
 </nav>
 
 <!-- HERO -->
@@ -810,7 +842,7 @@
     </p>
     <div class="hero-actions">
       <a href="#menu" class="btn-primary">Explore Menu</a>
-      <a href="#booking" class="btn-ghost">Book a Table</a>
+      <a href="https://www.sevenrooms.com/explore/outlier/reservations/create/search" target="_blank" class="btn-ghost">Book a Table</a>
     </div>
   </div>
   <div class="hero-rating">
@@ -1106,6 +1138,7 @@
       Near Trongate & Glasgow Green
     </p>
     <a href="https://www.google.com/maps/search/?api=1&query=Outlier+Restaurant+Glasgow" target="_blank" class="btn-primary" style="font-size:0.62rem;padding:12px 24px;">Get Directions →</a>
+    <a href="https://www.sevenrooms.com/explore/outlier/reservations/create/search" target="_blank" class="btn-ghost" style="font-size:0.62rem;padding:12px 24px;display:inline-block;margin-top:10px;">Reserve a Table →</a>
   </div>
 </div>
 
@@ -1114,10 +1147,22 @@
   <div class="booking-bg"></div>
   <div class="booking-subtitle">Reserve Your Table</div>
   <h2>Come as a <em>stranger,<br>leave as a regular.</em></h2>
-  <p>Reservations recommended, walk-ins welcome when space allows. Join the growing number of guests who keep coming back.</p>
-  <div class="booking-actions">
-    <a href="https://www.google.com/maps/search/?api=1&query=Outlier+Restaurant+Glasgow" target="_blank" class="btn-primary">Book Now</a>
-    <a href="tel:+441413000000" class="btn-ghost">Instagram @outlier</a>
+  <p>Book directly below — powered by SevenRooms. Pick your date, time, and party size.</p>
+
+  <!-- SevenRooms Embedded Widget -->
+  <div class="booking-widget-wrap">
+    <iframe
+      id="sevenrooms-iframe"
+      src="https://www.sevenrooms.com/explore/outlier/reservations/create/search?utm_source=website&utm_medium=embed"
+      title="Reserve at Outlier Glasgow"
+      frameborder="0"
+      scrolling="yes"
+      allowtransparency="true">
+    </iframe>
+    <div class="booking-fallback">
+      <p>Having trouble with the widget?</p>
+      <a href="https://www.sevenrooms.com/explore/outlier/reservations/create/search" target="_blank" class="btn-primary" style="display:inline-block;margin-top:12px;">Open Booking Page →</a>
+    </div>
   </div>
 </section>
 
@@ -1134,7 +1179,7 @@
         <li><a href="#menu">Menu</a></li>
         <li><a href="#gallery">Gallery</a></li>
         <li><a href="#reviews">Reviews</a></li>
-        <li><a href="#booking">Reservations</a></li>
+        <li><a href="https://www.sevenrooms.com/explore/outlier/reservations/create/search" target="_blank">Reservations</a></li>
       </ul>
     </div>
     <div>
