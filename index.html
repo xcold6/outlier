@@ -759,7 +759,131 @@
     margin-bottom: 22px;
   }
 
-  /* ── BOOKING WIDGET ── */
+  /* ── FULL MENU SYSTEM ── */
+  .full-menu-wrap {
+    background: var(--coal);
+    border-top: 1px solid rgba(196,146,59,0.15);
+    margin-top: 4px;
+  }
+  .menu-tabs {
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+    border-bottom: 1px solid rgba(196,146,59,0.15);
+    padding: 0 60px;
+    gap: 0;
+  }
+  .menu-tabs::-webkit-scrollbar { display: none; }
+  .mtab {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(240,228,208,0.35);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 22px 28px;
+    cursor: pointer;
+    transition: all 0.3s;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .mtab:hover { color: rgba(240,228,208,0.7); }
+  .mtab.active {
+    color: var(--amber);
+    border-bottom-color: var(--gold);
+  }
+  .mpanel { display: none; padding: 60px; }
+  .mpanel.active { display: block; }
+  .menu-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+  }
+  .mcol-head {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--amber);
+    margin-bottom: 28px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(196,146,59,0.15);
+  }
+  .mitem {
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(240,228,208,0.06);
+    transition: background 0.2s;
+  }
+  .mitem.popular { position: relative; }
+  .mitem.popular .mitem-name::after {
+    content: '★';
+    margin-left: 8px;
+    font-size: 0.6rem;
+    color: var(--gold);
+    vertical-align: middle;
+  }
+  .mitem-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 6px;
+  }
+  .mitem-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.08rem;
+    font-weight: 400;
+    color: var(--pale);
+    line-height: 1.3;
+  }
+  .mitem-price {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--gold);
+    flex-shrink: 0;
+    letter-spacing: 0.06em;
+  }
+  .mitem-desc {
+    font-size: 0.78rem;
+    color: rgba(240,228,208,0.42);
+    line-height: 1.75;
+    letter-spacing: 0.02em;
+  }
+  .mtag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.52rem;
+    letter-spacing: 0.1em;
+    padding: 2px 5px;
+    border-radius: 2px;
+    vertical-align: middle;
+    margin-left: 5px;
+    text-transform: lowercase;
+  }
+  .mtag.v  { background: rgba(140,180,120,0.18); color: #8cb478; }
+  .mtag.vg { background: rgba(100,200,140,0.15); color: #64c88c; }
+  .mtag.gf { background: rgba(220,180,80,0.15);  color: #dbb84a; }
+  .menu-note {
+    margin-top: 40px;
+    padding: 20px 28px;
+    border-left: 2px solid rgba(196,146,59,0.3);
+    font-size: 0.76rem;
+    color: rgba(240,228,208,0.35);
+    line-height: 1.85;
+    font-style: italic;
+    letter-spacing: 0.04em;
+  }
+  .menu-dinner-note { text-align: center; }
+
+  @media (max-width: 900px) {
+    .menu-tabs { padding: 0 20px; }
+    .mpanel { padding: 36px 20px; }
+    .menu-cols { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  /* ── FULL MENU SYSTEM ── */
   .booking-widget-wrap {
     position: relative;
     z-index: 2;
@@ -825,7 +949,7 @@
     <li><a href="#reviews">Reviews</a></li>
     <li><a href="#info">Visit</a></li>
   </ul>
-  <a href="https://www.sevenrooms.com/explore/outlier/reservations/create/search" target="_blank" class="nav-cta">Reserve a Table</a>
+  <a href="https://www.google.com/maps/reserve/v/dine/c/O3POmReMskg" target="_blank" class="nav-cta">Reserve a Table</a>
 </nav>
 
 <!-- HERO -->
@@ -842,7 +966,7 @@
     </p>
     <div class="hero-actions">
       <a href="#menu" class="btn-primary">Explore Menu</a>
-      <a href="https://www.sevenrooms.com/explore/outlier/reservations/create/search" target="_blank" class="btn-ghost">Book a Table</a>
+      <a href="https://www.google.com/maps/reserve/v/dine/c/O3POmReMskg" target="_blank" class="btn-ghost">Book a Table</a>
     </div>
   </div>
   <div class="hero-rating">
@@ -932,69 +1056,387 @@
 </div>
 
 <!-- MENU -->
-<section id="menu">
+<section id="menu" style="padding-bottom:0;">
   <div class="menu-header">
     <div>
       <div class="label">The Menu</div>
       <h2>Plates worth<br><em>talking about.</em></h2>
     </div>
-    <a href="#booking" class="btn-ghost">View Full Menu →</a>
+    <a href="https://www.google.com/maps/reserve/v/dine/c/O3POmReMskg" target="_blank" class="btn-ghost">Reserve a Table →</a>
   </div>
-  <div class="menu-grid">
+
+  <!-- PHOTO HIGHLIGHT STRIP -->
+  <div class="menu-grid" style="margin-bottom:4px;">
     <div class="menu-card featured reveal">
       <img src="https://images.unsplash.com/photo-1528736235302-52922df5c122?w=700&q=85&fit=crop" alt="Beef Shin Toastie">
       <div class="menu-card-overlay"></div>
       <div class="menu-card-content">
         <div class="menu-cat">★ Most Popular</div>
-        <div class="menu-name">Beef Shin<br>Toastie</div>
-        <div class="menu-desc">Slow-braised beef shin with fennel jam and melted cheese on sourdough. Off-the-scale excellent.</div>
+        <div class="menu-name">Beef Shin Toastie</div>
+        <div class="menu-desc">Fennel jam, smoked cheddar — off-the-scale excellent.</div>
       </div>
     </div>
     <div class="menu-card reveal">
-      <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600&q=85&fit=crop" alt="Almond Croissant">
+      <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600&q=85&fit=crop" alt="Scrambled Eggs">
       <div class="menu-card-overlay"></div>
       <div class="menu-card-content">
-        <div class="menu-cat">Bakery</div>
-        <div class="menu-name">Almond Croissant</div>
-        <div class="menu-desc">Flaky, golden, and baked in-house each morning. One of the best croissants in the city.</div>
+        <div class="menu-cat">Breakfast</div>
+        <div class="menu-name">Scrambled Eggs on Sourdough</div>
+        <div class="menu-desc">House-baked sourdough. Add bacon, mushroom, smoked mackerel.</div>
       </div>
     </div>
     <div class="menu-card reveal">
-      <img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=600&q=85&fit=crop" alt="Flat White Coffee">
+      <img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=600&q=85&fit=crop" alt="Coffee">
       <div class="menu-card-overlay"></div>
       <div class="menu-card-content">
         <div class="menu-cat">Coffee</div>
-        <div class="menu-name">Flat White</div>
-        <div class="menu-desc">Rich, fruity, balanced. So good one guest bought the beans to take back to Canada.</div>
+        <div class="menu-name">Speciality Coffee</div>
+        <div class="menu-desc">Flat white, cortado, long black, filter — all taken seriously.</div>
       </div>
     </div>
     <div class="menu-card reveal">
-      <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600&q=85&fit=crop" alt="Scrambled Eggs on Sourdough">
+      <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=85&fit=crop" alt="Dinner">
+      <div class="menu-card-overlay"></div>
+      <div class="menu-card-content">
+        <div class="menu-cat">Dinner</div>
+        <div class="menu-name">Seasonal Evening</div>
+        <div class="menu-desc">Thu–Sun dinner. Ask the team or make a reservation.</div>
+      </div>
+    </div>
+    <div class="menu-card reveal">
+      <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&q=85&fit=crop" alt="Bakery">
+      <div class="menu-card-overlay"></div>
+      <div class="menu-card-content">
+        <div class="menu-cat">In-House Bakery</div>
+        <div class="menu-name">Daily Fresh Bakes</div>
+        <div class="menu-desc">Cardamom buns, almond croissants, sausage rolls — made here.</div>
+      </div>
+    </div>
+    <div class="menu-card reveal">
+      <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=85&fit=crop" alt="Brunch">
       <div class="menu-card-overlay"></div>
       <div class="menu-card-content">
         <div class="menu-cat">Brunch</div>
-        <div class="menu-name">Scrambled Eggs<br>on Sourdough</div>
-        <div class="menu-desc">House-baked sourdough, silky scrambled eggs. Simple, brilliant.</div>
+        <div class="menu-name">Seasonal Brunch Plates</div>
+        <div class="menu-desc">Ricotta toasts, panzanella, French toast, rosti & more.</div>
       </div>
     </div>
-    <div class="menu-card reveal">
-      <img src="https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=600&q=85&fit=crop" alt="Cardamom Custard Bun">
-      <div class="menu-card-overlay"></div>
-      <div class="menu-card-content">
-        <div class="menu-cat">Bakery</div>
-        <div class="menu-name">Cardamom Custard Bun</div>
-        <div class="menu-desc">Fluffy, fragrant, perfectly spiced. The right amount of everything.</div>
+  </div>
+
+  <!-- FULL MENU TABS -->
+  <div class="full-menu-wrap reveal">
+    <div class="menu-tabs" role="tablist">
+      <button class="mtab active" data-tab="breakfast" role="tab">Breakfast</button>
+      <button class="mtab" data-tab="brunch" role="tab">Brunch</button>
+      <button class="mtab" data-tab="lunch" role="tab">Lunch</button>
+      <button class="mtab" data-tab="toasties" role="tab">Toasties &amp; Sandwiches</button>
+      <button class="mtab" data-tab="dinner" role="tab">Dinner</button>
+      <button class="mtab" data-tab="drinks" role="tab">Drinks</button>
+    </div>
+
+    <!-- BREAKFAST -->
+    <div class="mpanel active" id="tab-breakfast">
+      <div class="menu-cols">
+        <div class="menu-col">
+          <div class="mcol-head">Morning Bowls &amp; Plates</div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Apricot Yoghurt Bowl <span class="mtag v">v</span></span><span class="mitem-price">£9.5</span></div>
+            <div class="mitem-desc">Outlier granola, poached apricot, yoghurt</div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Porridge <span class="mtag v">v</span></span><span class="mitem-price">£8.0</span></div>
+            <div class="mitem-desc">Brûléed with banana butterscotch &amp; cinnamon</div>
+          </div>
+          <div class="mitem popular">
+            <div class="mitem-top"><span class="mitem-name">Scrambled Eggs on House Sourdough <span class="mtag v">v</span></span><span class="mitem-price">£8.5</span></div>
+            <div class="mitem-desc">
+              + House chili oil £2.0 &nbsp;·&nbsp; + Oyster mushroom £3.0<br>
+              + Smoked streaky bacon £3.0 &nbsp;·&nbsp; + House smoked mackerel £4.0
+            </div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Toast <span class="mtag v">v</span></span><span class="mitem-price">£4.0</span></div>
+            <div class="mitem-desc">With marmite butter on house sourdough</div>
+          </div>
+        </div>
+        <div class="menu-col">
+          <div class="mcol-head">Savoury Specials</div>
+          <div class="mitem popular">
+            <div class="mitem-top"><span class="mitem-name">Smoked Mackerel Kedgeree</span><span class="mitem-price">£12.0</span></div>
+            <div class="mitem-desc">With a boiled egg, coriander &amp; mint sauce</div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Polenta + Mushrooms <span class="mtag gf">gf</span><span class="mtag v">v</span></span><span class="mitem-price">£16.0</span></div>
+            <div class="mitem-desc">Fried egg, pickled walnut + sage</div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Pork Belly, Crispy Potato + Fried Egg</span><span class="mitem-price">£17.5</span></div>
+            <div class="mitem-desc">Mustard hollandaise + pickled walnut</div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Devilled Crab</span><span class="mitem-price">£12.0</span></div>
+            <div class="mitem-desc">On toasted city loaf with a poached egg</div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Braised Bean Salad <span class="mtag vg">vg</span></span><span class="mitem-price">£8.0</span></div>
+            <div class="mitem-desc">Haricot beans, hummus, fermented garlic honey, peppers + mint</div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-note">Menu rotates seasonally. Please inform staff of any allergies or dietary requirements.</div>
+    </div>
+
+    <!-- BRUNCH -->
+    <div class="mpanel" id="tab-brunch">
+      <div class="menu-cols">
+        <div class="menu-col">
+          <div class="mcol-head">Brunch Signatures</div>
+          <div class="mitem popular">
+            <div class="mitem-top"><span class="mitem-name">Charred Apricot + Ricotta Toast</span><span class="mitem-price">£8.5</span></div>
+            <div class="mitem-desc">Whipped ricotta, charred apricot, smoked honey + fennel jam</div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Bread Pudding French Toast</span><span class="mitem-price">£9.0</span></div>
+            <div class="mitem-desc">Tahini caramel, miso granola + whey butter</div>
+          </div>
+          <div class="mitem popular">
+            <div class="mitem-top"><span class="mitem-name">Poached Eggs on Apple Cider Muffin</span><span class="mitem-price">£9.5</span></div>
+            <div class="mitem-desc">Hot smoked trout, smoked hollandaise, tarragon oil and dill</div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Sage + Cumin Rosti</span><span class="mitem-price">£9.5</span></div>
+            <div class="mitem-desc">Green sauce, oyster mushroom, hazelnut dukkah + poached eggs</div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Beetroot Panzanella</span><span class="mitem-price">£9.0</span></div>
+            <div class="mitem-desc">Soaked sourdough, roasted beets, fermented garlic honey, ricotta, pickled shallots + almond gremolata</div>
+          </div>
+        </div>
+        <div class="menu-col">
+          <div class="mcol-head">Soups</div>
+          <div class="mitem-desc" style="margin-bottom:20px;font-size:0.78rem;color:rgba(240,228,208,0.4);">All served with house sourdough</div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Greek Chicken Broth</span><span class="mitem-price">£4.5</span></div>
+            <div class="mitem-desc">Lemon, egg, rice and parsley</div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Ajo Blanco</span><span class="mitem-price">£4.0</span></div>
+            <div class="mitem-desc">With pickled grapes + golden raisins</div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Lemongrass Broth <span class="mtag vg">vg</span></span><span class="mitem-price">£7.0</span></div>
+            <div class="mitem-desc">Kale laing, chili crisp, lime &nbsp;·&nbsp; + Soft boiled egg £1.50</div>
+          </div>
+          <div class="mcol-head" style="margin-top:36px;">Extras &amp; Sides</div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Scrambled Eggs on Sourdough</span><span class="mitem-price">£7.5</span></div>
+            <div class="mitem-desc">+ Bacon £2.0 &nbsp;·&nbsp; + Oyster mushroom £2.0 &nbsp;·&nbsp; + House smoked trout £2.5</div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-note">Brunch served all morning. Menu changes with the seasons.</div>
+    </div>
+
+    <!-- LUNCH -->
+    <div class="mpanel" id="tab-lunch">
+      <div class="menu-cols">
+        <div class="menu-col">
+          <div class="mcol-head">Lunch Plates</div>
+          <div class="mitem popular">
+            <div class="mitem-top"><span class="mitem-name">Chicken, Chips + Gravy</span><span class="mitem-price">£17.5</span></div>
+            <div class="mitem-desc">Pan fried chicken leg, brown butter, sage gravy</div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Cavatelli with Egg Yolk <span class="mtag v">v</span></span><span class="mitem-price">£12.0</span></div>
+            <div class="mitem-desc">Black pepper, parmigiano</div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Peach, Ricotta + Radicchio Salad <span class="mtag v">v</span></span><span class="mitem-price">£10.0</span></div>
+            <div class="mitem-desc">Whipped ricotta, pickled radicchio, sourdough + garlic honey</div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Smoked Mackerel Kedgeree</span><span class="mitem-price">£12.0</span></div>
+            <div class="mitem-desc">Boiled egg, coriander &amp; mint sauce</div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Smoked Ox Tongue</span><span class="mitem-price">£12.0</span></div>
+            <div class="mitem-desc">Gribiche, shallot, green apple on house rye</div>
+          </div>
+        </div>
+        <div class="menu-col">
+          <div class="mcol-head">Snacks &amp; Small</div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Outlier Sourdough, Marmite Butter</span><span class="mitem-price">£4.0</span></div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Potato Bread, Lincolnshire Poacher, Wild Garlic</span><span class="mitem-price">£5.0</span></div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Pickles &amp; Preserves</span><span class="mitem-price">£7.0</span></div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Topped Focaccia</span><span class="mitem-price">£4.0</span></div>
+            <div class="mitem-desc">Changes daily — ask your server</div>
+          </div>
+          <div class="menu-note" style="margin-top:30px;">Lunch served from 11am. Please inform staff of any allergies.</div>
+        </div>
       </div>
     </div>
-    <div class="menu-card reveal">
-      <img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=600&q=85&fit=crop" alt="Smoked Salmon">
-      <div class="menu-card-overlay"></div>
-      <div class="menu-card-content">
-        <div class="menu-cat">Brunch</div>
-        <div class="menu-name">Smoked Salmon</div>
-        <div class="menu-desc">Elegant, fresh, and beautifully presented. A perennial favourite.</div>
+
+    <!-- TOASTIES & SANDWICHES -->
+    <div class="mpanel" id="tab-toasties">
+      <div class="menu-cols">
+        <div class="menu-col">
+          <div class="mcol-head">Toasties</div>
+          <div class="mitem popular">
+            <div class="mitem-top"><span class="mitem-name">★ Beef Shin, Fennel Jam, Smoked Cheddar</span><span class="mitem-price">£10.5</span></div>
+            <div class="mitem-desc">The one everyone talks about. On house sourdough.</div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Romesco, Hispi Cabbage, Cheddar <span class="mtag v">v</span></span><span class="mitem-price">£8.5</span></div>
+            <div class="mitem-desc">*Contains nuts</div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Leek + Cheddar, House Pickle <span class="mtag v">v</span></span><span class="mitem-price">£10.0</span></div>
+          </div>
+        </div>
+        <div class="menu-col">
+          <div class="mcol-head">Sandwiches <span style="font-size:0.7rem;color:rgba(240,228,208,0.35);font-family:'DM Mono',monospace;letter-spacing:0.1em;">(from 11am)</span></div>
+          <div class="mitem popular">
+            <div class="mitem-top"><span class="mitem-name">Fried Chicken, Buffalo Harissa</span><span class="mitem-price">£12.0</span></div>
+            <div class="mitem-desc">Garlic mayo, ranch, slaw &amp; hot pickles in house tin loaf</div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Fried Oyster Mushrooms <span class="mtag v">v</span></span><span class="mitem-price">£12.0</span></div>
+            <div class="mitem-desc">House buffalo, garlic mayo, slaw + dill pickles on house tin loaf</div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Porchetta, Apricot Hot Sauce</span><span class="mitem-price">£12.0</span></div>
+            <div class="mitem-desc">Ranch, house pickles, lettuce on ciabatta</div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Dukkah Carrots, Sumac Onions <span class="mtag vg">vg</span></span><span class="mitem-price">£8.0</span></div>
+            <div class="mitem-desc">Green tahini on house focaccia</div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Hot Honey Fried Chicken</span><span class="mitem-price">£12.0</span></div>
+            <div class="mitem-desc">Confit garlic mayo, fennel slaw + house pickles</div>
+          </div>
+        </div>
       </div>
     </div>
+
+    <!-- DINNER -->
+    <div class="mpanel" id="tab-dinner">
+      <div class="menu-dinner-note reveal">
+        <span class="mtag" style="background:rgba(196,146,59,0.15);color:var(--amber);font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.2em;padding:6px 14px;text-transform:uppercase;">Thursday – Sunday Evenings</span>
+        <p style="margin-top:16px;font-size:0.82rem;color:rgba(240,228,208,0.45);line-height:1.9;">A changing seasonal dinner menu. Reservations strongly recommended.</p>
+      </div>
+      <div class="menu-cols" style="margin-top:48px;">
+        <div class="menu-col">
+          <div class="mcol-head">Snacks</div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Pickles &amp; Preserves</span><span class="mitem-price">£7.0</span></div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Potato Bread, Lincolnshire Poacher, Wild Garlic</span><span class="mitem-price">£5.0</span></div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Outlier Sourdough, Marmite Butter</span><span class="mitem-price">£4.0</span></div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Oyster, Preserved Tomatillo</span><span class="mitem-price">£4.0</span></div>
+          </div>
+          <div class="mcol-head" style="margin-top:40px;">Starters</div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Beef Tartare, Anchovy, Gherkin</span><span class="mitem-price">£15.0</span></div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Courgette, Gooseberry, Mornay Sauce</span><span class="mitem-price">£11.0</span></div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Isle of Wight Tomato, Ginger, Tomato Broth</span><span class="mitem-price">£10.0</span></div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Red Mullet, Rhubarb, Radish, Strawberry Nahm Jim</span><span class="mitem-price">£12.0</span></div>
+          </div>
+        </div>
+        <div class="menu-col">
+          <div class="mcol-head">Mains</div>
+          <div class="mitem popular">
+            <div class="mitem-top"><span class="mitem-name">Lamb, Spring Pea, Green Harissa, Yoghurt</span><span class="mitem-price">£28.0</span></div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Sea Trout, Cucumber, Thai Basil, Clam</span><span class="mitem-price">£26.0</span></div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Agnolotti, Potato, Wild Leek</span><span class="mitem-price">£18.0</span></div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">BBQ Leek, Potato, Sambal</span><span class="mitem-price">£17.0</span></div>
+          </div>
+          <div class="mcol-head" style="margin-top:40px;">Desserts</div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">70% Chocolate, Black Garlic Ice Cream, Coffee</span><span class="mitem-price">£7.0</span></div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Cream Cheese, Yoghurt, Cherry Blossom Granita</span><span class="mitem-price">£7.0</span></div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Comté, Chicory Jam, Beer Tostada</span><span class="mitem-price">£10.0</span></div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Petit Four</span><span class="mitem-price">£2.0</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="menu-note">Service is <em>not</em> included in your bill. Menu changes seasonally.</div>
+    </div>
+
+    <!-- DRINKS -->
+    <div class="mpanel" id="tab-drinks">
+      <div class="menu-cols">
+        <div class="menu-col">
+          <div class="mcol-head">Coffee</div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Flat White</span><span class="mitem-price">£3.0</span></div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Latte / Cappuccino</span><span class="mitem-price">£3.2</span></div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Long Black / Espresso</span><span class="mitem-price">£2.5</span></div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Cortado / Macchiato / Filter</span><span class="mitem-price">£2.5</span></div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Mocha</span></div>
+          </div>
+          <div class="mitem popular">
+            <div class="mitem-top"><span class="mitem-name">Bare Bones Hot Chocolate</span><span class="mitem-price">£3.5</span></div>
+          </div>
+          <div class="mcol-head" style="margin-top:36px;">Tea</div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Tea Pot — Postcard Teas</span><span class="mitem-price">£2.75</span></div>
+            <div class="mitem-desc">Family Breakfast · Earl Grey · Lemon Pekoe · Peppermint · Green</div>
+          </div>
+        </div>
+        <div class="menu-col">
+          <div class="mcol-head">Cold Drinks</div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Fritz Colas</span><span class="mitem-price">£2.8</span></div>
+            <div class="mitem-desc">Cola · Diet Cola · Lemonade · Orangeade</div>
+          </div>
+          <div class="mitem">
+            <div class="mitem-top"><span class="mitem-name">Apple Juice / Orange Juice</span><span class="mitem-price">£2.0</span></div>
+          </div>
+          <div class="mcol-head" style="margin-top:36px;">Wine &amp; Beer</div>
+          <div class="mitem-desc" style="font-size:0.78rem;color:rgba(240,228,208,0.38);line-height:1.8;">Wine, beer, cocktails and spirits available.<br>Please ask your server for today's selection.</div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -1138,7 +1580,7 @@
       Near Trongate & Glasgow Green
     </p>
     <a href="https://www.google.com/maps/search/?api=1&query=Outlier+Restaurant+Glasgow" target="_blank" class="btn-primary" style="font-size:0.62rem;padding:12px 24px;">Get Directions →</a>
-    <a href="https://www.sevenrooms.com/explore/outlier/reservations/create/search" target="_blank" class="btn-ghost" style="font-size:0.62rem;padding:12px 24px;display:inline-block;margin-top:10px;">Reserve a Table →</a>
+    <a href="https://www.google.com/maps/reserve/v/dine/c/O3POmReMskg" target="_blank" class="btn-ghost" style="font-size:0.62rem;padding:12px 24px;display:inline-block;margin-top:10px;">Reserve a Table →</a>
   </div>
 </div>
 
@@ -1147,9 +1589,9 @@
   <div class="booking-bg"></div>
   <div class="booking-subtitle">Reserve Your Table</div>
   <h2>Come as a <em>stranger,<br>leave as a regular.</em></h2>
-  <p>Book directly below — powered by SevenRooms. Pick your date, time, and party size.</p>
+  <p>Book directly below — or open the full reservation page. Reservations recommended, walk-ins welcome when space allows.</p>
 
-  <!-- SevenRooms Embedded Widget -->
+  <!-- Booking Widget Wrap -->
   <div class="booking-widget-wrap">
     <iframe
       id="sevenrooms-iframe"
@@ -1160,8 +1602,8 @@
       allowtransparency="true">
     </iframe>
     <div class="booking-fallback">
-      <p>Having trouble with the widget?</p>
-      <a href="https://www.sevenrooms.com/explore/outlier/reservations/create/search" target="_blank" class="btn-primary" style="display:inline-block;margin-top:12px;">Open Booking Page →</a>
+      <p>Prefer to book via Google?</p>
+      <a href="https://www.google.com/maps/reserve/v/dine/c/O3POmReMskg" target="_blank" class="btn-primary" style="display:inline-block;margin-top:12px;">Reserve on Google Maps →</a>
     </div>
   </div>
 </section>
@@ -1210,6 +1652,16 @@
 </footer>
 
 <script>
+  // Menu tabs
+  document.querySelectorAll('.mtab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.mtab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.mpanel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+    });
+  });
+
   // Scroll-triggered nav style
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
