@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Outlier — Glasgow</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Raleway:wght@200;300;400&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --ink:    #0d0c0a;
+    --coal:   #161410;
+    --char:   #1e1b17;
+    --stone:  #2c2820;
+    --gold:   #c4923b;
+    --amber:  #e8b568;
+    --cream:  #f0e4d0;
+    --pale:   #f7f1e8;
+    --mist:   rgba(240,228,208,0.06);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ink);
+    color: var(--cream);
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--ink); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 28px 60px;
+    mix-blend-mode: normal;
+    transition: background 0.5s, padding 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(13,12,10,0.92);
+    backdrop-filter: blur(12px);
+    padding: 18px 60px;
+    border-bottom: 1px solid rgba(196,146,59,0.15);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--cream);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 42px; list-style: none; }
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(240,228,208,0.6);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--amber); }
+  .nav-cta {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    border: 1px solid rgba(196,146,59,0.5);
+    padding: 10px 22px;
+    transition: all 0.3s;
+  }
+  .nav-cta:hover {
+    background: var(--gold);
+    color: var(--ink);
+  }
+
+  /* ── HERO ── */
+  #hero {
+    position: relative;
+    height: 100vh; min-height: 700px;
+    display: flex; align-items: flex-end;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1800&q=85&fit=crop');
+    background-size: cover;
+    background-position: center 40%;
+    transform: scale(1.08);
+    animation: heroZoom 18s ease-out forwards;
+  }
+  @keyframes heroZoom {
+    from { transform: scale(1.08); }
+    to   { transform: scale(1.0); }
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      170deg,
+      rgba(13,12,10,0.25) 0%,
+      rgba(13,12,10,0.1)  40%,
+      rgba(13,12,10,0.78) 75%,
+      rgba(13,12,10,0.98) 100%
+    );
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    padding: 0 60px 90px;
+    max-width: 1300px; width: 100%;
+    opacity: 0;
+    animation: heroFadeUp 1.2s 0.5s ease forwards;
+  }
+  @keyframes heroFadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .hero-tag::before {
+    content: '';
+    display: block; width: 36px; height: 1px;
+    background: var(--amber);
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4.5rem, 9vw, 8.5rem);
+    font-weight: 300;
+    line-height: 0.92;
+    letter-spacing: -0.01em;
+    color: var(--pale);
+    margin-bottom: 28px;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--amber);
+  }
+  .hero-subtitle {
+    font-size: 0.82rem;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    color: rgba(240,228,208,0.65);
+    max-width: 380px;
+    line-height: 1.9;
+    margin-bottom: 42px;
+  }
+  .hero-actions { display: flex; gap: 20px; align-items: center; }
+  .btn-primary {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    background: var(--gold);
+    color: var(--ink);
+    text-decoration: none;
+    padding: 16px 36px;
+    transition: all 0.3s;
+  }
+  .btn-primary:hover { background: var(--amber); transform: translateY(-2px); }
+  .btn-ghost {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cream);
+    text-decoration: none;
+    padding: 16px 36px;
+    border: 1px solid rgba(240,228,208,0.25);
+    transition: all 0.3s;
+  }
+  .btn-ghost:hover { border-color: var(--amber); color: var(--amber); }
+
+  .hero-rating {
+    position: absolute; right: 60px; bottom: 90px; z-index: 2;
+    text-align: right;
+    opacity: 0;
+    animation: heroFadeUp 1.2s 0.9s ease forwards;
+  }
+  .rating-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: var(--amber);
+    line-height: 1;
+  }
+  .rating-stars { color: var(--gold); font-size: 0.9rem; margin: 6px 0; }
+  .rating-count {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    color: rgba(240,228,208,0.4);
+    text-transform: uppercase;
+  }
+
+  /* ── TICKER ── */
+  .ticker-wrap {
+    background: var(--gold);
+    padding: 14px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .ticker {
+    display: inline-block;
+    animation: ticker 28s linear infinite;
+  }
+  .ticker span {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin: 0 40px;
+  }
+  .ticker-dot { opacity: 0.4; }
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* ── SECTION BASICS ── */
+  section { padding: 120px 60px; }
+  .label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 18px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .label::before {
+    content: '';
+    display: block; width: 28px; height: 1px;
+    background: var(--gold);
+  }
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 5vw, 4.8rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--pale);
+  }
+  h2 em { font-style: italic; color: var(--amber); }
+
+  /* ── ABOUT ── */
+  #about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: center;
+    background: var(--coal);
+  }
+  .about-img-stack {
+    position: relative;
+    height: 600px;
+  }
+  .about-img-main {
+    position: absolute;
+    top: 0; left: 0;
+    width: 76%; height: 85%;
+    object-fit: cover;
+    filter: brightness(0.88) contrast(1.05);
+  }
+  .about-img-accent {
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 52%; height: 50%;
+    object-fit: cover;
+    filter: brightness(0.85) contrast(1.08);
+    border: 4px solid var(--coal);
+  }
+  .about-badge {
+    position: absolute;
+    top: 48%; left: 58%;
+    transform: translate(-50%, -50%);
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    background: var(--gold);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    z-index: 3;
+  }
+  .about-badge span:first-child {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.9rem;
+    font-weight: 400;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .about-badge span:last-child {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.52rem;
+    letter-spacing: 0.1em;
+    color: var(--ink);
+    text-align: center;
+    line-height: 1.4;
+  }
+  .about-text h2 { margin-bottom: 28px; }
+  .about-text p {
+    font-size: 0.9rem;
+    line-height: 2;
+    color: rgba(240,228,208,0.65);
+    margin-bottom: 22px;
+  }
+  .about-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    margin-top: 52px;
+    border-top: 1px solid rgba(196,146,59,0.2);
+    border-left: 1px solid rgba(196,146,59,0.2);
+  }
+  .stat {
+    padding: 28px 24px;
+    border-right: 1px solid rgba(196,146,59,0.2);
+    border-bottom: 1px solid rgba(196,146,59,0.2);
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.4rem;
+    font-weight: 300;
+    color: var(--amber);
+    display: block;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat-lbl {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(240,228,208,0.4);
+  }
+
+  /* ── MENU ── */
+  #menu {
+    background: var(--ink);
+    padding-bottom: 80px;
+  }
+  .menu-header {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 72px;
+  }
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .menu-card {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4/5;
+    cursor: pointer;
+  }
+  .menu-card img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: brightness(0.75) contrast(1.1) saturate(0.85);
+    transition: transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.6s;
+  }
+  .menu-card:hover img {
+    transform: scale(1.07);
+    filter: brightness(0.6) contrast(1.15) saturate(0.9);
+  }
+  .menu-card-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(13,12,10,0.95) 0%, transparent 55%);
+  }
+  .menu-card-content {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 28px;
+    transform: translateY(8px);
+    transition: transform 0.4s;
+  }
+  .menu-card:hover .menu-card-content { transform: translateY(0); }
+  .menu-cat {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 8px;
+  }
+  .menu-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.55rem;
+    font-weight: 400;
+    color: var(--pale);
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  .menu-desc {
+    font-size: 0.75rem;
+    color: rgba(240,228,208,0.6);
+    line-height: 1.7;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s;
+  }
+  .menu-card:hover .menu-desc { max-height: 60px; }
+  .menu-card.featured {
+    grid-column: span 1;
+    grid-row: span 2;
+    aspect-ratio: auto;
+  }
+
+  /* ── GALLERY STRIP ── */
+  #gallery {
+    padding: 0;
+    background: var(--char);
+  }
+  .gallery-scroll {
+    display: flex;
+    gap: 3px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    cursor: grab;
+    padding: 3px 0;
+  }
+  .gallery-scroll::-webkit-scrollbar { display: none; }
+  .gallery-scroll img {
+    height: 360px;
+    width: auto;
+    flex-shrink: 0;
+    object-fit: cover;
+    filter: brightness(0.82) contrast(1.08) saturate(0.8);
+    transition: filter 0.4s;
+  }
+  .gallery-scroll img:hover { filter: brightness(0.95) contrast(1.1) saturate(1); }
+  .gallery-label {
+    padding: 50px 60px 30px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  /* ── REVIEWS ── */
+  #reviews {
+    background: var(--coal);
+  }
+  .reviews-header { margin-bottom: 64px; }
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .review-card {
+    background: var(--stone);
+    padding: 42px 36px;
+    transition: background 0.3s;
+    position: relative;
+  }
+  .review-card:hover { background: #312c24; }
+  .review-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    color: var(--gold);
+    line-height: 0.7;
+    margin-bottom: 22px;
+    opacity: 0.6;
+  }
+  .review-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.75;
+    color: var(--cream);
+    margin-bottom: 28px;
+    flex-grow: 1;
+  }
+  .review-footer {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    border-top: 1px solid rgba(196,146,59,0.15);
+    padding-top: 22px;
+  }
+  .reviewer-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(240,228,208,0.5);
+  }
+  .review-stars { color: var(--gold); font-size: 0.75rem; }
+  .review-featured {
+    background: var(--gold);
+    grid-row: span 2;
+    display: flex; flex-direction: column;
+  }
+  .review-featured .review-quote { color: var(--ink); opacity: 0.25; }
+  .review-featured .review-text { color: var(--ink); }
+  .review-featured .reviewer-name { color: rgba(13,12,10,0.55); }
+  .review-featured .review-stars { color: var(--ink); }
+  .review-featured .review-footer { border-color: rgba(13,12,10,0.15); }
+
+  /* ── INFO STRIP ── */
+  #info {
+    background: var(--ink);
+    border-top: 1px solid rgba(196,146,59,0.15);
+    border-bottom: 1px solid rgba(196,146,59,0.15);
+    padding: 0 60px;
+  }
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-left: 1px solid rgba(196,146,59,0.12);
+  }
+  .info-cell {
+    padding: 60px 40px;
+    border-right: 1px solid rgba(196,146,59,0.12);
+  }
+  .info-icon {
+    font-size: 1.3rem;
+    margin-bottom: 18px;
+    display: block;
+    color: var(--gold);
+  }
+  .info-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+  .info-body {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: rgba(240,228,208,0.75);
+    line-height: 1.9;
+  }
+
+  /* ── CTA / BOOKING ── */
+  #booking {
+    position: relative;
+    overflow: hidden;
+    padding: 160px 60px;
+    text-align: center;
+    background: var(--char);
+  }
+  .booking-bg {
+    position: absolute; inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&q=80&fit=crop');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.28) contrast(1.1) saturate(0.5);
+  }
+  #booking > * { position: relative; z-index: 1; }
+  .booking-subtitle {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 24px;
+  }
+  #booking h2 { font-size: clamp(3rem, 6vw, 6rem); margin-bottom: 20px; }
+  #booking p {
+    font-size: 0.88rem;
+    color: rgba(240,228,208,0.5);
+    letter-spacing: 0.08em;
+    margin-bottom: 52px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.9;
+  }
+  .booking-actions { display: flex; gap: 20px; justify-content: center; align-items: center; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    padding: 80px 60px 40px;
+    border-top: 1px solid rgba(196,146,59,0.12);
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 60px;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--pale);
+    display: block;
+    margin-bottom: 20px;
+    text-decoration: none;
+  }
+  .footer-tagline {
+    font-size: 0.8rem;
+    color: rgba(240,228,208,0.38);
+    line-height: 1.9;
+    max-width: 240px;
+    letter-spacing: 0.04em;
+  }
+  .footer-heading {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 22px;
+  }
+  .footer-links { list-style: none; }
+  .footer-links li + li { margin-top: 12px; }
+  .footer-links a {
+    font-size: 0.82rem;
+    color: rgba(240,228,208,0.45);
+    text-decoration: none;
+    transition: color 0.3s;
+    letter-spacing: 0.04em;
+  }
+  .footer-links a:hover { color: var(--amber); }
+  .footer-bottom {
+    border-top: 1px solid rgba(196,146,59,0.1);
+    padding-top: 30px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-copy {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.16em;
+    color: rgba(240,228,208,0.25);
+  }
+  .social-links { display: flex; gap: 24px; }
+  .social-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(240,228,208,0.3);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .social-links a:hover { color: var(--amber); }
+
+  /* ── DIVIDER ── */
+  .divider {
+    display: flex; align-items: center; gap: 22px;
+    margin: 12px 0 48px;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1; height: 1px;
+    background: linear-gradient(to right, transparent, rgba(196,146,59,0.3), transparent);
+  }
+  .divider-icon { color: var(--gold); font-size: 0.8rem; }
+
+  /* ── HIGHLIGHT BAND ── */
+  .highlight-band {
+    background: var(--stone);
+    padding: 70px 60px;
+    display: flex;
+    gap: 0;
+    border-top: 1px solid rgba(196,146,59,0.1);
+    border-bottom: 1px solid rgba(196,146,59,0.1);
+    overflow: hidden;
+  }
+  .highlight-item {
+    flex: 1;
+    padding: 0 50px;
+    border-right: 1px solid rgba(196,146,59,0.15);
+    position: relative;
+  }
+  .highlight-item:first-child { padding-left: 0; }
+  .highlight-item:last-child { border-right: none; }
+  .hi-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.82rem;
+    font-style: italic;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .hi-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.45rem;
+    font-weight: 400;
+    color: var(--pale);
+    margin-bottom: 10px;
+  }
+  .hi-body {
+    font-size: 0.78rem;
+    color: rgba(240,228,208,0.45);
+    line-height: 1.85;
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── MAP EMBED ── */
+  .map-section {
+    padding: 0;
+    height: 420px;
+    position: relative;
+    overflow: hidden;
+  }
+  .map-section iframe {
+    width: 100%; height: 100%;
+    border: none;
+    filter: grayscale(100%) contrast(1.1) brightness(0.75);
+    transition: filter 0.5s;
+  }
+  .map-section:hover iframe {
+    filter: grayscale(60%) contrast(1.05) brightness(0.85);
+  }
+  .map-overlay {
+    position: absolute; top: 50%; left: 60px;
+    transform: translateY(-50%);
+    background: var(--ink);
+    border: 1px solid rgba(196,146,59,0.25);
+    padding: 36px 42px;
+    z-index: 2;
+  }
+  .map-overlay h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--pale);
+    margin-bottom: 10px;
+  }
+  .map-overlay p {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    color: rgba(240,228,208,0.45);
+    line-height: 1.9;
+    margin-bottom: 22px;
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 22px 28px; }
+    nav.scrolled { padding: 16px 28px; }
+    .nav-links { display: none; }
+    section { padding: 80px 28px; }
+    #about { grid-template-columns: 1fr; gap: 52px; }
+    .about-img-stack { height: 420px; }
+    .menu-grid { grid-template-columns: 1fr 1fr; }
+    .reviews-grid { grid-template-columns: 1fr; }
+    .info-grid { grid-template-columns: 1fr 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .highlight-band { flex-direction: column; gap: 40px; }
+    .highlight-item { padding: 0; border-right: none; border-bottom: 1px solid rgba(196,146,59,0.12); padding-bottom: 36px; }
+    .hero-content { padding: 0 28px 70px; }
+    .hero-rating { right: 28px; bottom: 70px; }
+    #info { padding: 0 28px; }
+    #booking { padding: 100px 28px; }
+    footer { padding: 60px 28px 30px; }
+    .map-section { height: 520px; }
+    .map-overlay { left: 28px; right: 28px; top: auto; bottom: 30px; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">Outlier</a>
+  <ul class="nav-links">
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#info">Visit</a></li>
+  </ul>
+  <a href="https://www.google.com/maps/search/?api=1&query=Outlier+Restaurant+Glasgow" target="_blank" class="nav-cta">Reserve</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Glasgow · Est. East End</div>
+    <h1 class="hero-title">
+      Not your<br><em>average</em><br>brunch.
+    </h1>
+    <p class="hero-subtitle">
+      Elevated plates, in-house baked goods, and exceptional coffee on London Road, Glasgow. An Outlier in the truest sense.
+    </p>
+    <div class="hero-actions">
+      <a href="#menu" class="btn-primary">Explore Menu</a>
+      <a href="#booking" class="btn-ghost">Book a Table</a>
+    </div>
+  </div>
+  <div class="hero-rating">
+    <div class="rating-num">4.6</div>
+    <div class="rating-stars">★★★★★</div>
+    <div class="rating-count">660 Google Reviews</div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span>Beef Shin Toastie</span><span class="ticker-dot">—</span>
+    <span>Cardamom Custard Bun</span><span class="ticker-dot">—</span>
+    <span>Almond Croissant</span><span class="ticker-dot">—</span>
+    <span>Smoked Salmon</span><span class="ticker-dot">—</span>
+    <span>Open Kitchen</span><span class="ticker-dot">—</span>
+    <span>Daily Fresh Bakeries</span><span class="ticker-dot">—</span>
+    <span>Exceptional Coffee</span><span class="ticker-dot">—</span>
+    <span>38 London Rd, Glasgow</span><span class="ticker-dot">—</span>
+    <span>Beef Shin Toastie</span><span class="ticker-dot">—</span>
+    <span>Cardamom Custard Bun</span><span class="ticker-dot">—</span>
+    <span>Almond Croissant</span><span class="ticker-dot">—</span>
+    <span>Smoked Salmon</span><span class="ticker-dot">—</span>
+    <span>Open Kitchen</span><span class="ticker-dot">—</span>
+    <span>Daily Fresh Bakeries</span><span class="ticker-dot">—</span>
+    <span>Exceptional Coffee</span><span class="ticker-dot">—</span>
+    <span>38 London Rd, Glasgow</span><span class="ticker-dot">—</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-img-stack reveal">
+    <img class="about-img-main" src="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?w=900&q=85&fit=crop" alt="Outlier café interior">
+    <img class="about-img-accent" src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&q=85&fit=crop" alt="Fresh baked pastries">
+    <div class="about-badge">
+      <span>4.6</span>
+      <span>Google<br>Rating</span>
+    </div>
+  </div>
+  <div class="about-text reveal">
+    <div class="label">Our Story</div>
+    <h2>A culinary<br><em>education</em><br>on a plate.</h2>
+    <div class="divider"><span class="divider-icon">✦</span></div>
+    <p>Outlier is Glasgow's quietly viral neighbourhood gem — a brunch restaurant and bakehouse on London Road where real chefs cook with intention. Creative menus, bold flavours, and a warm open kitchen where you can watch the magic happen.</p>
+    <p>From slow-braised beef shin toasties to cardamom-scented custard buns baked fresh each morning, every dish is crafted to surprise and satisfy. Not your typical breakfast offering — this is creative, interesting, and elevated food at honest prices.</p>
+    <div class="about-stats">
+      <div class="stat">
+        <span class="stat-num">660+</span>
+        <span class="stat-lbl">Reviews</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">£10</span>
+        <span class="stat-lbl">From per person</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">Daily</span>
+        <span class="stat-lbl">Fresh Bakes</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HIGHLIGHTS BAND -->
+<div class="highlight-band">
+  <div class="highlight-item reveal">
+    <div class="hi-num">01</div>
+    <div class="hi-title">In-House Bakery</div>
+    <div class="hi-body">Every pastry, loaf, and bun is made on-site daily. Watch the bakers emerge from the kitchen with fresh trays throughout the morning.</div>
+  </div>
+  <div class="highlight-item reveal">
+    <div class="hi-num">02</div>
+    <div class="hi-title">Open Kitchen</div>
+    <div class="hi-body">Sit back and watch your meal being crafted. The open kitchen brings honesty and energy to the dining experience.</div>
+  </div>
+  <div class="highlight-item reveal">
+    <div class="hi-num">03</div>
+    <div class="hi-title">Seasonal Menu</div>
+    <div class="hi-body">The menu evolves with the seasons, always rotating, always surprising. No two visits are ever quite the same.</div>
+  </div>
+  <div class="highlight-item reveal">
+    <div class="hi-num">04</div>
+    <div class="hi-title">Speciality Coffee</div>
+    <div class="hi-body">From perfectly pulled flat whites to long blacks that would impress in Melbourne — coffee here is taken seriously.</div>
+  </div>
+</div>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="menu-header">
+    <div>
+      <div class="label">The Menu</div>
+      <h2>Plates worth<br><em>talking about.</em></h2>
+    </div>
+    <a href="#booking" class="btn-ghost">View Full Menu →</a>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-card featured reveal">
+      <img src="https://images.unsplash.com/photo-1528736235302-52922df5c122?w=700&q=85&fit=crop" alt="Beef Shin Toastie">
+      <div class="menu-card-overlay"></div>
+      <div class="menu-card-content">
+        <div class="menu-cat">★ Most Popular</div>
+        <div class="menu-name">Beef Shin<br>Toastie</div>
+        <div class="menu-desc">Slow-braised beef shin with fennel jam and melted cheese on sourdough. Off-the-scale excellent.</div>
+      </div>
+    </div>
+    <div class="menu-card reveal">
+      <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=600&q=85&fit=crop" alt="Almond Croissant">
+      <div class="menu-card-overlay"></div>
+      <div class="menu-card-content">
+        <div class="menu-cat">Bakery</div>
+        <div class="menu-name">Almond Croissant</div>
+        <div class="menu-desc">Flaky, golden, and baked in-house each morning. One of the best croissants in the city.</div>
+      </div>
+    </div>
+    <div class="menu-card reveal">
+      <img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=600&q=85&fit=crop" alt="Flat White Coffee">
+      <div class="menu-card-overlay"></div>
+      <div class="menu-card-content">
+        <div class="menu-cat">Coffee</div>
+        <div class="menu-name">Flat White</div>
+        <div class="menu-desc">Rich, fruity, balanced. So good one guest bought the beans to take back to Canada.</div>
+      </div>
+    </div>
+    <div class="menu-card reveal">
+      <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=600&q=85&fit=crop" alt="Scrambled Eggs on Sourdough">
+      <div class="menu-card-overlay"></div>
+      <div class="menu-card-content">
+        <div class="menu-cat">Brunch</div>
+        <div class="menu-name">Scrambled Eggs<br>on Sourdough</div>
+        <div class="menu-desc">House-baked sourdough, silky scrambled eggs. Simple, brilliant.</div>
+      </div>
+    </div>
+    <div class="menu-card reveal">
+      <img src="https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=600&q=85&fit=crop" alt="Cardamom Custard Bun">
+      <div class="menu-card-overlay"></div>
+      <div class="menu-card-content">
+        <div class="menu-cat">Bakery</div>
+        <div class="menu-name">Cardamom Custard Bun</div>
+        <div class="menu-desc">Fluffy, fragrant, perfectly spiced. The right amount of everything.</div>
+      </div>
+    </div>
+    <div class="menu-card reveal">
+      <img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=600&q=85&fit=crop" alt="Smoked Salmon">
+      <div class="menu-card-overlay"></div>
+      <div class="menu-card-content">
+        <div class="menu-cat">Brunch</div>
+        <div class="menu-name">Smoked Salmon</div>
+        <div class="menu-desc">Elegant, fresh, and beautifully presented. A perennial favourite.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<div id="gallery">
+  <div class="gallery-label">
+    <div class="label" style="margin-bottom:0">Gallery</div>
+    <span style="font-family:'DM Mono',monospace;font-size:0.62rem;letter-spacing:0.16em;color:rgba(240,228,208,0.28);text-transform:uppercase;">Drag to explore →</span>
+  </div>
+  <div class="gallery-scroll" id="galleryScroll">
+    <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=560&q=80&fit=crop" alt="café atmosphere">
+    <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=480&q=80&fit=crop" alt="fresh pastries">
+    <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=480&q=80&fit=crop" alt="coffee">
+    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=480&q=80&fit=crop" alt="food plate">
+    <img src="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?w=560&q=80&fit=crop" alt="restaurant interior">
+    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=480&q=80&fit=crop" alt="brunch spread">
+    <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=480&q=80&fit=crop" alt="bakery goods">
+    <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=480&q=80&fit=crop" alt="sandwich">
+  </div>
+</div>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="reviews-header reveal">
+    <div class="label">What Guests Say</div>
+    <h2>Heard on<br><em>Google.</em></h2>
+  </div>
+  <div class="reviews-grid">
+
+    <div class="review-card review-featured reveal">
+      <div class="review-quote">"</div>
+      <p class="review-text">A must-visit stop for breakfast in Glasgow. This place has built up a viral reputation and deservedly so — the food is delicious and elevated. Not your typical breakfast offering but creative, interesting, and a culinary education.</p>
+      <div class="review-footer">
+        <span class="reviewer-name">Martha L.M. — Local Guide</span>
+        <span class="review-stars">★★★★★</span>
+      </div>
+    </div>
+
+    <div class="review-card reveal">
+      <div class="review-quote">"</div>
+      <p class="review-text">The best breakfast experience I had during my whole trip to Scotland. From the moment I walked in, the place had such a warm, welcoming vibe.</p>
+      <div class="review-footer">
+        <span class="reviewer-name">Salwa A.H.</span>
+        <span class="review-stars">★★★★★</span>
+      </div>
+    </div>
+
+    <div class="review-card reveal">
+      <div class="review-quote">"</div>
+      <p class="review-text">Best brunch place I've ever been to. I've been three times now. I drive from Edinburgh just to go here. I always recommend this place if anyone mentions Glasgow.</p>
+      <div class="review-footer">
+        <span class="reviewer-name">Michael — Verified Review</span>
+        <span class="review-stars">★★★★★</span>
+      </div>
+    </div>
+
+    <div class="review-card reveal">
+      <div class="review-quote">"</div>
+      <p class="review-text">The beef shin, fennel jam and cheese toastie was off the scale excellent. The café has a very good atmosphere with a youngish, energetic customer base.</p>
+      <div class="review-footer">
+        <span class="reviewer-name">Gerry C. — Local Guide</span>
+        <span class="review-stars">★★★★★</span>
+      </div>
+    </div>
+
+    <div class="review-card reveal">
+      <div class="review-quote">"</div>
+      <p class="review-text">We came back every morning of our stay and it did not disappoint. Delicious food, amazing hot chocolate, and the team is super nice and welcoming.</p>
+      <div class="review-footer">
+        <span class="reviewer-name">Alexandra L.G. — Local Guide</span>
+        <span class="review-stars">★★★★★</span>
+      </div>
+    </div>
+
+    <div class="review-card reveal">
+      <div class="review-quote">"</div>
+      <p class="review-text">My favourite café in Glasgow. Own baked pastries that are properly cooked — great colour and flavour. Savoury dishes full of interesting, balanced flavours. Coffee has a great rich character.</p>
+      <div class="review-footer">
+        <span class="reviewer-name">Rob B. — Local Guide</span>
+        <span class="review-stars">★★★★★</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- INFO -->
+<section id="info">
+  <div class="info-grid">
+    <div class="info-cell reveal">
+      <span class="info-icon">◷</span>
+      <div class="info-title">Opening Hours</div>
+      <div class="info-body">
+        Mon – Fri: 8am – 5pm<br>
+        Sat – Sun: 9am – 5pm<br>
+        <span style="color:rgba(196,146,59,0.6);font-size:0.85rem;">Dinner evenings vary</span>
+      </div>
+    </div>
+    <div class="info-cell reveal">
+      <span class="info-icon">◎</span>
+      <div class="info-title">Location</div>
+      <div class="info-body">
+        38 London Road<br>
+        Glasgow, G1 5NB<br>
+        <span style="color:rgba(196,146,59,0.6);font-size:0.85rem;">East City Centre</span>
+      </div>
+    </div>
+    <div class="info-cell reveal">
+      <span class="info-icon">✦</span>
+      <div class="info-title">What We Offer</div>
+      <div class="info-body">
+        Dine-in · Takeaway<br>
+        Delivery available<br>
+        <span style="color:rgba(196,146,59,0.6);font-size:0.85rem;">Reservations welcome</span>
+      </div>
+    </div>
+    <div class="info-cell reveal">
+      <span class="info-icon">◈</span>
+      <div class="info-title">Pricing</div>
+      <div class="info-body">
+        £10 – £20 per person<br>
+        Cards & contactless<br>
+        <span style="color:rgba(196,146,59,0.6);font-size:0.85rem;">Dogs welcome inside</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<div class="map-section">
+  <iframe
+    src="https://maps.google.com/maps?q=38+London+Rd+Glasgow+G1+5NB&t=&z=15&ie=UTF8&iwloc=&output=embed"
+    allowfullscreen=""
+    loading="lazy"
+    title="Outlier Glasgow Map">
+  </iframe>
+  <div class="map-overlay reveal">
+    <h3>Find Us</h3>
+    <p>
+      38 London Road, Glasgow G1 5NB<br>
+      Near Trongate & Glasgow Green
+    </p>
+    <a href="https://www.google.com/maps/search/?api=1&query=Outlier+Restaurant+Glasgow" target="_blank" class="btn-primary" style="font-size:0.62rem;padding:12px 24px;">Get Directions →</a>
+  </div>
+</div>
+
+<!-- BOOKING CTA -->
+<section id="booking">
+  <div class="booking-bg"></div>
+  <div class="booking-subtitle">Reserve Your Table</div>
+  <h2>Come as a <em>stranger,<br>leave as a regular.</em></h2>
+  <p>Reservations recommended, walk-ins welcome when space allows. Join the growing number of guests who keep coming back.</p>
+  <div class="booking-actions">
+    <a href="https://www.google.com/maps/search/?api=1&query=Outlier+Restaurant+Glasgow" target="_blank" class="btn-primary">Book Now</a>
+    <a href="tel:+441413000000" class="btn-ghost">Instagram @outlier</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <a href="#" class="footer-logo">Outlier</a>
+      <p class="footer-tagline">Creative brunch and bakery on London Road, Glasgow. Not your average breakfast.</p>
+    </div>
+    <div>
+      <div class="footer-heading">Visit</div>
+      <ul class="footer-links">
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#booking">Reservations</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Info</div>
+      <ul class="footer-links">
+        <li><a href="#">38 London Road, G1 5NB</a></li>
+        <li><a href="#">Open 8am – 5pm</a></li>
+        <li><a href="#">Dine-in &amp; Takeaway</a></li>
+        <li><a href="#">Dogs Welcome</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Follow</div>
+      <ul class="footer-links">
+        <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
+        <li><a href="https://www.google.com/maps/search/?api=1&query=Outlier+Restaurant+Glasgow" target="_blank">Google Reviews</a></li>
+        <li><a href="#">Delivery</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 Outlier Glasgow — 38 London Road, G1 5NB</span>
+    <div class="social-links">
+      <a href="https://instagram.com" target="_blank">Instagram</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=Outlier+Restaurant+Glasgow" target="_blank">Google</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll-triggered nav style
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Drag-to-scroll gallery
+  const gs = document.getElementById('galleryScroll');
+  let isDown = false, startX, scrollLeft;
+  gs.addEventListener('mousedown', e => {
+    isDown = true;
+    gs.style.cursor = 'grabbing';
+    startX = e.pageX - gs.offsetLeft;
+    scrollLeft = gs.scrollLeft;
+  });
+  gs.addEventListener('mouseleave', () => { isDown = false; gs.style.cursor = 'grab'; });
+  gs.addEventListener('mouseup', () => { isDown = false; gs.style.cursor = 'grab'; });
+  gs.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - gs.offsetLeft;
+    gs.scrollLeft = scrollLeft - (x - startX) * 1.5;
+  });
+</script>
+</body>
+</html>
